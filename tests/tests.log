@@ -1,0 +1,2086 @@
+Tests started at 2026-05-12 14:47:25 UTC
+Branch: feature/UKICLOENA-2968
+Pull Request ID: 17
+
+Static scan terraform_validate result: Success
+
+Static scan tflint result: Success
+
+Static scan trivy result: Success
+
+Plan result for 'configure_encryption': Success
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.glue.aws_glue_catalog_database.this will be created
+  + resource "aws_glue_catalog_database" "this" {
+      + arn          = (known after apply)
+      + catalog_id   = (known after apply)
+      + description  = "Test Glue catalog database using data located in an S3 bucket"
+      + id           = (known after apply)
+      + location_uri = (known after apply)
+      + name         = "eits_tf_aws_glue"
+      + region       = "eu-west-2"
+      + tags         = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all     = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+
+      + create_table_default_permission (known after apply)
+    }
+
+  # module.glue.aws_glue_data_catalog_encryption_settings.catalog_encryption[0] will be created
+  + resource "aws_glue_data_catalog_encryption_settings" "catalog_encryption" {
+      + catalog_id = (known after apply)
+      + id         = (known after apply)
+      + region     = "eu-west-2"
+
+      + data_catalog_encryption_settings {
+          + connection_password_encryption {
+              + aws_kms_key_id                       = "arn:aws:kms:eu-west-2:077820194866:alias/aws/glue"
+              + return_connection_password_encrypted = true
+            }
+          + encryption_at_rest {
+              + catalog_encryption_mode = "SSE-KMS"
+              + sse_aws_kms_key_id      = "arn:aws:kms:eu-west-2:077820194866:alias/aws/glue"
+            }
+        }
+    }
+
+  # module.glue.module.glue_service_role[0].aws_iam_role.default[0] will be created
+  + resource "aws_iam_role" "default" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = "glue.amazonaws.com"
+                        }
+                      + Sid       = "AllowGlueAssumeRole"
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + description           = "Role for AWS Glue, used for database eits_tf_aws_glue"
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "BURoleForAWSGlueServiceRole-eits_tf_aws_glue"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags                  = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-iam"
+          + "eitsce:moduleversion" = "1.9.3"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all              = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-iam"
+          + "eitsce:moduleversion" = "1.9.3"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + unique_id             = (known after apply)
+
+      + inline_policy (known after apply)
+    }
+
+  # module.glue.module.glue_service_role[0].aws_iam_role_policy_attachment.managed["arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"] will be created
+  + resource "aws_iam_role_policy_attachment" "managed" {
+      + id         = (known after apply)
+      + policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
+      + role       = "BURoleForAWSGlueServiceRole-eits_tf_aws_glue"
+    }
+
+Plan: 4 to add, 0 to change, 0 to destroy.
+
+
+Wiz.io IaC scan result for 'configure_encryption': Success
+Report URL: https://app.wiz.io/findings/cicd-scans#~%2528cicd_scan~%2527006a033d-d80b-81cd-95f1-efd2b9778001%252A2c2026-05-12T14%2525%25252A3a49%2525%25252A3a04.522672954Z%2527%2529
+{
+  "__typename": "CICDDiskScanResult",
+  "osPackages": null,
+  "libraries": null,
+  "applications": null,
+  "endOfLifeTechnologies": null,
+  "cpes": null,
+  "secrets": null,
+  "dataFindings": null,
+  "vulnerableSBOMArtifactsByNameVersion": null,
+  "hostConfiguration": {
+    "hostConfigurationFrameworks": null,
+    "hostConfigurationFindings": null,
+    "analytics": {
+      "severity": {
+        "infoCount": 0,
+        "lowCount": 0,
+        "mediumCount": 0,
+        "highCount": 0,
+        "criticalCount": 0
+      },
+      "status": {
+        "passCount": 0,
+        "failCount": 0,
+        "errorCount": 0,
+        "notAssessedCount": 0,
+        "totalCount": 0
+      }
+    }
+  },
+  "failedPolicyMatches": null,
+  "analytics": {
+    "vulnerabilities": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "unfixedCount": 0,
+      "totalCount": 0
+    },
+    "secrets": {
+      "privateKeyCount": 0,
+      "publicKeyCount": 0,
+      "passwordCount": 0,
+      "certificateCount": 0,
+      "cloudKeyCount": 0,
+      "sshAuthorizedKeyCount": 0,
+      "dbConnectionStringCount": 0,
+      "gitCredentialCount": 0,
+      "presignedURLCount": 0,
+      "saasAPIKeyCount": 0,
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "hostConfiguration": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0
+    },
+    "malware": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "softwareSupplyChain": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "aiModel": null,
+    "sast": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "filesScannedCount": 1,
+    "directoriesScannedCount": 1
+  },
+  "sbomOutput": "",
+  "malwares": null,
+  "softwareSupplyChain": null,
+  "aiModels": null,
+  "sast": null,
+  "iac": {
+    "__typename": "CICDIACScanResult",
+    "failedPolicyMatches": null,
+    "ruleMatches": null,
+    "scanStatistics": {
+      "infoMatches": 0,
+      "lowMatches": 0,
+      "mediumMatches": 0,
+      "highMatches": 0,
+      "criticalMatches": 0,
+      "totalMatches": 0,
+      "filesFound": 1,
+      "filesParsed": 1,
+      "queriesLoaded": 27,
+      "queriesExecuted": 27,
+      "queriesExecutionFailed": 0
+    },
+    "secrets": null,
+    "fileTypes": null,
+    "discoveredResources": null
+  },
+  "ruleMatches": null,
+  "scanStatistics": {
+    "infoMatches": 0,
+    "lowMatches": 0,
+    "mediumMatches": 0,
+    "highMatches": 0,
+    "criticalMatches": 0,
+    "totalMatches": 0,
+    "filesFound": 1,
+    "filesParsed": 1,
+    "queriesLoaded": 27,
+    "queriesExecuted": 27,
+    "queriesExecutionFailed": 0
+  },
+  "fileTypes": null,
+  "discoveredResources": null
+}
+
+Plan result for 'existing_iam_role': Success
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.existing_iam_role.aws_iam_role.default[0] will be created
+  + resource "aws_iam_role" "default" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = "glue.amazonaws.com"
+                        }
+                      + Sid       = "AllowGlueAssumeRole"
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + description           = "Role for AWS Glue, used for database tf_aws_glue_3"
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "BURoleForAWSGlueServiceRole-tf_aws_glue_3"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags                  = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-iam"
+          + "eitsce:moduleversion" = "1.9.7"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all              = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-iam"
+          + "eitsce:moduleversion" = "1.9.7"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + unique_id             = (known after apply)
+
+      + inline_policy (known after apply)
+    }
+
+  # module.existing_iam_role.aws_iam_role_policy_attachment.managed["arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"] will be created
+  + resource "aws_iam_role_policy_attachment" "managed" {
+      + id         = (known after apply)
+      + policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
+      + role       = "BURoleForAWSGlueServiceRole-tf_aws_glue_3"
+    }
+
+  # module.glue.aws_glue_catalog_database.this will be created
+  + resource "aws_glue_catalog_database" "this" {
+      + arn          = (known after apply)
+      + catalog_id   = (known after apply)
+      + description  = "Test Glue catalog database using data located in an S3 bucket"
+      + id           = (known after apply)
+      + location_uri = "s3://awsglue-datasets/examples/medicare"
+      + name         = "ti-tf_aws_glue_3-glue"
+      + region       = "eu-west-2"
+      + tags         = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all     = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+
+      + create_table_default_permission (known after apply)
+    }
+
+  # module.glue.aws_glue_catalog_table.this["medicare"] will be created
+  + resource "aws_glue_catalog_table" "this" {
+      + arn           = (known after apply)
+      + catalog_id    = (known after apply)
+      + database_name = "ti-tf_aws_glue_3-glue"
+      + description   = "Test Glue Catalog table"
+      + id            = (known after apply)
+      + name          = "medicare"
+      + parameters    = (known after apply)
+      + region        = "eu-west-2"
+      + table_type    = (known after apply)
+
+      + partition_index (known after apply)
+
+      + storage_descriptor {
+          + location = "s3://awsglue-datasets/examples/medicare"
+
+          + columns (known after apply)
+        }
+    }
+
+  # module.glue.aws_glue_crawler.this["medicare_test_crawler"] will be created
+  + resource "aws_glue_crawler" "this" {
+      + arn           = (known after apply)
+      + database_name = "ti-tf_aws_glue_3-glue"
+      + id            = (known after apply)
+      + name          = "medicare_test_crawler"
+      + region        = "eu-west-2"
+      + role          = (known after apply)
+      + tags          = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all      = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+
+      + catalog_target {
+          + database_name = "tf_aws_glue_3"
+          + tables        = [
+              + "medicare",
+            ]
+        }
+
+      + schema_change_policy {
+          + delete_behavior = "LOG"
+          + update_behavior = "UPDATE_IN_DATABASE"
+        }
+    }
+
+  # module.glue.module.cloudwatch_logs[0].aws_cloudwatch_log_group.this will be created
+  + resource "aws_cloudwatch_log_group" "this" {
+      + arn                         = (known after apply)
+      + deletion_protection_enabled = (known after apply)
+      + id                          = (known after apply)
+      + log_group_class             = "STANDARD"
+      + name                        = "uk-cloudenablement-sbx-aws_glue-jobs"
+      + name_prefix                 = (known after apply)
+      + region                      = "eu-west-2"
+      + retention_in_days           = 90
+      + skip_destroy                = false
+      + tags                        = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-cloudwatch-logs"
+          + "eitsce:moduleversion" = "2.6.1"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all                    = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-cloudwatch-logs"
+          + "eitsce:moduleversion" = "2.6.1"
+          + "eitsce:tagschecked"   = "true"
+        }
+    }
+
+Plan: 6 to add, 0 to change, 0 to destroy.
+
+
+Wiz.io IaC scan result for 'existing_iam_role': Success
+Report URL: https://app.wiz.io/findings/cicd-scans#~%2528cicd_scan~%2527006a033e-0e0b-8781-a35d-c91a7fdc8001%252A2c2026-05-12T14%2525%25252A3a49%2525%25252A3a58.03695471Z%2527%2529
+{
+  "__typename": "CICDDiskScanResult",
+  "osPackages": null,
+  "libraries": null,
+  "applications": null,
+  "endOfLifeTechnologies": null,
+  "cpes": null,
+  "secrets": null,
+  "dataFindings": null,
+  "vulnerableSBOMArtifactsByNameVersion": null,
+  "hostConfiguration": {
+    "hostConfigurationFrameworks": null,
+    "hostConfigurationFindings": null,
+    "analytics": {
+      "severity": {
+        "infoCount": 0,
+        "lowCount": 0,
+        "mediumCount": 0,
+        "highCount": 0,
+        "criticalCount": 0
+      },
+      "status": {
+        "passCount": 0,
+        "failCount": 0,
+        "errorCount": 0,
+        "notAssessedCount": 0,
+        "totalCount": 0
+      }
+    }
+  },
+  "failedPolicyMatches": null,
+  "analytics": {
+    "vulnerabilities": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "unfixedCount": 0,
+      "totalCount": 0
+    },
+    "secrets": {
+      "privateKeyCount": 0,
+      "publicKeyCount": 0,
+      "passwordCount": 0,
+      "certificateCount": 0,
+      "cloudKeyCount": 0,
+      "sshAuthorizedKeyCount": 0,
+      "dbConnectionStringCount": 0,
+      "gitCredentialCount": 0,
+      "presignedURLCount": 0,
+      "saasAPIKeyCount": 0,
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "hostConfiguration": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0
+    },
+    "malware": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "softwareSupplyChain": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "aiModel": null,
+    "sast": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "filesScannedCount": 1,
+    "directoriesScannedCount": 1
+  },
+  "sbomOutput": "",
+  "malwares": null,
+  "softwareSupplyChain": null,
+  "aiModels": null,
+  "sast": null,
+  "iac": {
+    "__typename": "CICDIACScanResult",
+    "failedPolicyMatches": null,
+    "ruleMatches": null,
+    "scanStatistics": {
+      "infoMatches": 0,
+      "lowMatches": 0,
+      "mediumMatches": 0,
+      "highMatches": 0,
+      "criticalMatches": 0,
+      "totalMatches": 0,
+      "filesFound": 1,
+      "filesParsed": 1,
+      "queriesLoaded": 27,
+      "queriesExecuted": 27,
+      "queriesExecutionFailed": 0
+    },
+    "secrets": null,
+    "fileTypes": null,
+    "discoveredResources": null
+  },
+  "ruleMatches": null,
+  "scanStatistics": {
+    "infoMatches": 0,
+    "lowMatches": 0,
+    "mediumMatches": 0,
+    "highMatches": 0,
+    "criticalMatches": 0,
+    "totalMatches": 0,
+    "filesFound": 1,
+    "filesParsed": 1,
+    "queriesLoaded": 27,
+    "queriesExecuted": 27,
+    "queriesExecutionFailed": 0
+  },
+  "fileTypes": null,
+  "discoveredResources": null
+}
+
+Plan result for 's3_data_source': Success
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # data.aws_iam_policy_document.glue_role_policy will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "glue_role_policy" {
+      + id            = (known after apply)
+      + json          = (known after apply)
+      + minified_json = (known after apply)
+
+      + statement {
+          + actions   = [
+              + "kms:Decrypt",
+              + "kms:DescribeKey",
+              + "kms:Encrypt",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "AllowGlueAccessToKMS"
+        }
+      + statement {
+          + actions   = [
+              + "s3:Get*",
+              + "s3:List*",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + (known after apply),
+              + (known after apply),
+            ]
+          + sid       = "AllowGlueReadAccessToS3"
+        }
+      + statement {
+          + actions   = [
+              + "s3:GetObject",
+              + "s3:ListBucket",
+              + "s3:PutObject",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + (known after apply),
+              + (known after apply),
+            ]
+          + sid       = "AllowGlueWriteAccessToS3"
+        }
+    }
+
+  # aws_s3_object.example_data will be created
+  + resource "aws_s3_object" "example_data" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = (known after apply)
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = (known after apply)
+      + etag                   = (known after apply)
+      + force_destroy          = true
+      + id                     = (known after apply)
+      + key                    = "sample_data.csv"
+      + kms_key_id             = (known after apply)
+      + region                 = "eu-west-2"
+      + server_side_encryption = (known after apply)
+      + source                 = "src/sample_data.csv"
+      + storage_class          = (known after apply)
+      + tags_all               = (known after apply)
+      + version_id             = (known after apply)
+    }
+
+  # aws_s3_object.job_script will be created
+  + resource "aws_s3_object" "job_script" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = (known after apply)
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content                = <<-EOT
+            from datetime import datetime
+            from pyspark.context import SparkContext
+            import pyspark.sql.functions as f
+            
+            from awsglue.utils import getResolvedOptions
+            from pyspark.context import SparkContext
+            from awsglue.context import GlueContext
+            from awsglue.dynamicframe import DynamicFrame
+            from awsglue.job import Job
+            
+            spark_context = SparkContext.getOrCreate()
+            glue_context = GlueContext(spark_context)
+            session = glue_context.spark_session
+            
+            glue_db = "eits_tf_aws_glue"
+            glue_tbl = "077820194866-eits-tf-aws-glue-source"
+            
+            s3_write_path = "s3://077820194866-eits-tf-aws-glue-destination"
+            
+            dt_start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            print("Start time:", dt_start)
+            
+            dynamic_frame_read = glue_context.create_dynamic_frame.from_catalog(database = glue_db, table_name = glue_tbl)
+            
+            data_frame = dynamic_frame_read.toDF()
+            
+            decode_col = f.floor(data_frame["year"]/10)*10
+            data_frame = data_frame.withColumn("decade", decode_col)
+            
+            
+            data_frame_aggregated = data_frame.groupby("decade").agg(
+                f.count(f.col("movie")).alias('movie_count'),
+                f.mean(f.col("rating")).alias('rating_mean'),
+                )
+            
+            data_frame_aggregated = data_frame_aggregated.orderBy(f.desc("movie_count"))
+            
+            data_frame_aggregated.show(10)
+            
+            data_frame_aggregated = data_frame_aggregated.repartition(1)
+            
+            dynamic_frame_write = DynamicFrame.fromDF(data_frame_aggregated, glue_context, "dynamic_frame_write")
+            
+            glue_context.write_dynamic_frame.from_options(
+                frame = dynamic_frame_write,
+                connection_type = "s3",
+                connection_options = {
+                    "path": s3_write_path,
+                },
+                format = "csv"
+            )
+            
+            dt_end = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            print("Start time:", dt_end)
+        EOT
+      + content_type           = (known after apply)
+      + etag                   = (known after apply)
+      + force_destroy          = true
+      + id                     = (known after apply)
+      + key                    = "glue_code.py"
+      + kms_key_id             = (known after apply)
+      + region                 = "eu-west-2"
+      + server_side_encryption = (known after apply)
+      + storage_class          = (known after apply)
+      + tags_all               = (known after apply)
+      + version_id             = (known after apply)
+    }
+
+  # module.bucket_kms_key.aws_kms_alias.this["s3"] will be created
+  + resource "aws_kms_alias" "this" {
+      + arn            = (known after apply)
+      + id             = (known after apply)
+      + name           = "alias/eits-tf-aws-glue-s3-kms"
+      + name_prefix    = (known after apply)
+      + region         = "eu-west-2"
+      + target_key_arn = (known after apply)
+      + target_key_id  = (known after apply)
+    }
+
+  # module.bucket_kms_key.aws_kms_key.this will be created
+  + resource "aws_kms_key" "this" {
+      + arn                                = (known after apply)
+      + bypass_policy_lockout_safety_check = false
+      + customer_master_key_spec           = "SYMMETRIC_DEFAULT"
+      + deletion_window_in_days            = 30
+      + description                        = "KMS key to encrypt S3 buckets for Glue testing"
+      + enable_key_rotation                = true
+      + id                                 = (known after apply)
+      + is_enabled                         = true
+      + key_id                             = (known after apply)
+      + key_usage                          = "ENCRYPT_DECRYPT"
+      + multi_region                       = false
+      + policy                             = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = [
+                          + "kms:ReEncrypt*",
+                          + "kms:GenerateDataKeyWithoutPlaintext",
+                          + "kms:GenerateDataKey",
+                          + "kms:Encrypt",
+                          + "kms:DescribeKey",
+                          + "kms:Decrypt",
+                        ]
+                      + Condition = {
+                          + StringLike = {
+                              + "aws:PrincipalArn" = "arn:aws:iam::077820194866:role/BURoleForAWSGlueServiceRole-eits_tf_aws_glue"
+                            }
+                        }
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + AWS = "*"
+                        }
+                      + Resource  = "*"
+                      + Sid       = "AllowGlueServiceRole"
+                    },
+                  + {
+                      + Action    = "kms:*"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + AWS = "arn:aws:iam::077820194866:role/eec-aws-aura-iac-deployment-role"
+                        }
+                      + Resource  = "*"
+                      + Sid       = "KeyOwner"
+                    },
+                  + {
+                      + Action    = [
+                          + "kms:Update*",
+                          + "kms:UntagResource",
+                          + "kms:TagResource",
+                          + "kms:ScheduleKeyDeletion",
+                          + "kms:Revoke*",
+                          + "kms:Put*",
+                          + "kms:List*",
+                          + "kms:Get*",
+                          + "kms:Enable*",
+                          + "kms:Disable*",
+                          + "kms:Describe*",
+                          + "kms:Delete*",
+                          + "kms:Create*",
+                          + "kms:CancelKeyDeletion",
+                        ]
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + AWS = [
+                              + "arn:aws:iam::077820194866:role/eec-aws-aura-iac-deployment-role",
+                              + "arn:aws:iam::077820194866:role/AdministratorAccessRole",
+                            ]
+                        }
+                      + Resource  = "*"
+                      + Sid       = "KeyAdministration"
+                    },
+                  + {
+                      + Action    = [
+                          + "kms:ReEncrypt*",
+                          + "kms:GenerateDataKey*",
+                          + "kms:Encrypt",
+                          + "kms:DescribeKey",
+                          + "kms:Decrypt",
+                        ]
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = "s3.amazonaws.com"
+                        }
+                      + Resource  = "*"
+                      + Sid       = "KeyUsageServices"
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + region                             = "eu-west-2"
+      + rotation_period_in_days            = 365
+      + tags                               = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-kms"
+          + "eitsce:moduleversion" = "1.8.0"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all                           = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-kms"
+          + "eitsce:moduleversion" = "1.8.0"
+          + "eitsce:tagschecked"   = "true"
+        }
+    }
+
+  # module.destination_bucket.data.aws_iam_policy_document.block_nonsecure_access will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "block_nonsecure_access" {
+      + id            = (known after apply)
+      + json          = (known after apply)
+      + minified_json = (known after apply)
+
+      + statement {
+          + actions   = [
+              + "s3:*",
+            ]
+          + effect    = "Deny"
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "EITSEnforceSSLOnlyAccess"
+
+          + condition {
+              + test     = "Bool"
+              + values   = [
+                  + "false",
+                ]
+              + variable = "aws:SecureTransport"
+            }
+
+          + principals {
+              + identifiers = [
+                  + "*",
+                ]
+              + type        = "AWS"
+            }
+        }
+      + statement {
+          + actions   = [
+              + "s3:*",
+            ]
+          + effect    = "Deny"
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "EITSEnforceTLSv12orHigher"
+
+          + condition {
+              + test     = "NumericLessThan"
+              + values   = [
+                  + "1.2",
+                ]
+              + variable = "s3:TlsVersion"
+            }
+
+          + principals {
+              + identifiers = [
+                  + "*",
+                ]
+              + type        = "AWS"
+            }
+        }
+    }
+
+  # module.destination_bucket.data.aws_iam_policy_document.source_documents will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "source_documents" {
+      + id                      = (known after apply)
+      + json                    = (known after apply)
+      + minified_json           = (known after apply)
+      + source_policy_documents = [
+          + (known after apply),
+        ]
+    }
+
+  # module.destination_bucket.aws_s3_bucket.this will be created
+  + resource "aws_s3_bucket" "this" {
+      + acceleration_status         = (known after apply)
+      + acl                         = (known after apply)
+      + arn                         = (known after apply)
+      + bucket                      = "077820194866-eits-tf-aws-glue-destination"
+      + bucket_domain_name          = (known after apply)
+      + bucket_namespace            = (known after apply)
+      + bucket_prefix               = (known after apply)
+      + bucket_region               = (known after apply)
+      + bucket_regional_domain_name = (known after apply)
+      + force_destroy               = true
+      + hosted_zone_id              = (known after apply)
+      + id                          = (known after apply)
+      + object_lock_enabled         = (known after apply)
+      + policy                      = (known after apply)
+      + region                      = "eu-west-2"
+      + request_payer               = (known after apply)
+      + tags                        = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-s3"
+          + "eitsce:moduleversion" = "2.11.0"
+          + "eitsce:sourceipcheck" = "disabled"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all                    = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-s3"
+          + "eitsce:moduleversion" = "2.11.0"
+          + "eitsce:sourceipcheck" = "disabled"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + website_domain              = (known after apply)
+      + website_endpoint            = (known after apply)
+
+      + cors_rule (known after apply)
+
+      + grant (known after apply)
+
+      + lifecycle_rule (known after apply)
+
+      + logging (known after apply)
+
+      + object_lock_configuration (known after apply)
+
+      + replication_configuration (known after apply)
+
+      + server_side_encryption_configuration (known after apply)
+
+      + versioning (known after apply)
+
+      + website (known after apply)
+    }
+
+  # module.destination_bucket.aws_s3_bucket_ownership_controls.this will be created
+  + resource "aws_s3_bucket_ownership_controls" "this" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+      + region = "eu-west-2"
+
+      + rule {
+          + object_ownership = "BucketOwnerEnforced"
+        }
+    }
+
+  # module.destination_bucket.aws_s3_bucket_policy.this will be created
+  + resource "aws_s3_bucket_policy" "this" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+      + policy = (known after apply)
+      + region = "eu-west-2"
+    }
+
+  # module.destination_bucket.aws_s3_bucket_public_access_block.this will be created
+  + resource "aws_s3_bucket_public_access_block" "this" {
+      + block_public_acls       = true
+      + block_public_policy     = true
+      + bucket                  = (known after apply)
+      + id                      = (known after apply)
+      + ignore_public_acls      = true
+      + region                  = "eu-west-2"
+      + restrict_public_buckets = true
+    }
+
+  # module.destination_bucket.aws_s3_bucket_server_side_encryption_configuration.this will be created
+  + resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+      + region = "eu-west-2"
+
+      + rule {
+          + blocked_encryption_types = (known after apply)
+          + bucket_key_enabled       = true
+
+          + apply_server_side_encryption_by_default {
+              + kms_master_key_id = (known after apply)
+              + sse_algorithm     = "aws:kms"
+            }
+        }
+    }
+
+  # module.destination_bucket.aws_s3_bucket_versioning.this[0] will be created
+  + resource "aws_s3_bucket_versioning" "this" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+      + region = "eu-west-2"
+
+      + versioning_configuration {
+          + mfa_delete = (known after apply)
+          + status     = "Enabled"
+        }
+    }
+
+  # module.destination_bucket.time_sleep.wait_for_s3_bucket will be created
+  + resource "time_sleep" "wait_for_s3_bucket" {
+      + create_duration = "5s"
+      + id              = (known after apply)
+    }
+
+  # module.glue.aws_glue_catalog_database.this will be created
+  + resource "aws_glue_catalog_database" "this" {
+      + arn          = (known after apply)
+      + catalog_id   = (known after apply)
+      + description  = "Test Glue catalog database using data located in an S3 bucket"
+      + id           = (known after apply)
+      + location_uri = (known after apply)
+      + name         = "eits_tf_aws_glue"
+      + region       = "eu-west-2"
+      + tags         = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all     = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+
+      + create_table_default_permission (known after apply)
+    }
+
+  # module.glue.aws_glue_crawler.this["sample_data_test_crawler"] will be created
+  + resource "aws_glue_crawler" "this" {
+      + arn           = (known after apply)
+      + database_name = "eits_tf_aws_glue"
+      + id            = (known after apply)
+      + name          = "sample_data_test_crawler"
+      + region        = "eu-west-2"
+      + role          = (known after apply)
+      + tags          = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all      = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+
+      + s3_target {
+          + exclusions = [
+              + "*.py",
+            ]
+          + path       = (known after apply)
+        }
+
+      + schema_change_policy {
+          + delete_behavior = "DELETE_FROM_DATABASE"
+          + update_behavior = "UPDATE_IN_DATABASE"
+        }
+    }
+
+  # module.glue.aws_glue_job.this["sample_data_test_job"] will be created
+  + resource "aws_glue_job" "this" {
+      + arn               = (known after apply)
+      + default_arguments = {
+          + "--continuous-log-logGroup"          = "uk-cloudenablement-sbx-aws_glue-jobs"
+          + "--enable-continuous-cloudwatch-log" = "true"
+          + "--enable-continuous-log-filter"     = "true"
+          + "--enable-metrics"                   = null
+        }
+      + glue_version      = "4.0"
+      + id                = (known after apply)
+      + job_mode          = (known after apply)
+      + max_capacity      = (known after apply)
+      + name              = "sample_data_test_job"
+      + number_of_workers = 5
+      + region            = "eu-west-2"
+      + role_arn          = (known after apply)
+      + tags              = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all          = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + timeout           = 10
+      + worker_type       = "G.1X"
+
+      + command {
+          + name            = "glueetl"
+          + python_version  = "3"
+          + runtime         = (known after apply)
+          + script_location = (known after apply)
+        }
+
+      + execution_property {
+          + max_concurrent_runs = 1
+        }
+
+      + notification_property (known after apply)
+    }
+
+  # module.source_bucket.data.aws_iam_policy_document.block_nonsecure_access will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "block_nonsecure_access" {
+      + id            = (known after apply)
+      + json          = (known after apply)
+      + minified_json = (known after apply)
+
+      + statement {
+          + actions   = [
+              + "s3:*",
+            ]
+          + effect    = "Deny"
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "EITSEnforceSSLOnlyAccess"
+
+          + condition {
+              + test     = "Bool"
+              + values   = [
+                  + "false",
+                ]
+              + variable = "aws:SecureTransport"
+            }
+
+          + principals {
+              + identifiers = [
+                  + "*",
+                ]
+              + type        = "AWS"
+            }
+        }
+      + statement {
+          + actions   = [
+              + "s3:*",
+            ]
+          + effect    = "Deny"
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "EITSEnforceTLSv12orHigher"
+
+          + condition {
+              + test     = "NumericLessThan"
+              + values   = [
+                  + "1.2",
+                ]
+              + variable = "s3:TlsVersion"
+            }
+
+          + principals {
+              + identifiers = [
+                  + "*",
+                ]
+              + type        = "AWS"
+            }
+        }
+    }
+
+  # module.source_bucket.data.aws_iam_policy_document.source_documents will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "source_documents" {
+      + id                      = (known after apply)
+      + json                    = (known after apply)
+      + minified_json           = (known after apply)
+      + source_policy_documents = [
+          + (known after apply),
+        ]
+    }
+
+  # module.source_bucket.aws_s3_bucket.this will be created
+  + resource "aws_s3_bucket" "this" {
+      + acceleration_status         = (known after apply)
+      + acl                         = (known after apply)
+      + arn                         = (known after apply)
+      + bucket                      = "077820194866-eits-tf-aws-glue-source"
+      + bucket_domain_name          = (known after apply)
+      + bucket_namespace            = (known after apply)
+      + bucket_prefix               = (known after apply)
+      + bucket_region               = (known after apply)
+      + bucket_regional_domain_name = (known after apply)
+      + force_destroy               = true
+      + hosted_zone_id              = (known after apply)
+      + id                          = (known after apply)
+      + object_lock_enabled         = (known after apply)
+      + policy                      = (known after apply)
+      + region                      = "eu-west-2"
+      + request_payer               = (known after apply)
+      + tags                        = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-s3"
+          + "eitsce:moduleversion" = "2.11.0"
+          + "eitsce:sourceipcheck" = "disabled"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all                    = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-s3"
+          + "eitsce:moduleversion" = "2.11.0"
+          + "eitsce:sourceipcheck" = "disabled"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + website_domain              = (known after apply)
+      + website_endpoint            = (known after apply)
+
+      + cors_rule (known after apply)
+
+      + grant (known after apply)
+
+      + lifecycle_rule (known after apply)
+
+      + logging (known after apply)
+
+      + object_lock_configuration (known after apply)
+
+      + replication_configuration (known after apply)
+
+      + server_side_encryption_configuration (known after apply)
+
+      + versioning (known after apply)
+
+      + website (known after apply)
+    }
+
+  # module.source_bucket.aws_s3_bucket_ownership_controls.this will be created
+  + resource "aws_s3_bucket_ownership_controls" "this" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+      + region = "eu-west-2"
+
+      + rule {
+          + object_ownership = "BucketOwnerEnforced"
+        }
+    }
+
+  # module.source_bucket.aws_s3_bucket_policy.this will be created
+  + resource "aws_s3_bucket_policy" "this" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+      + policy = (known after apply)
+      + region = "eu-west-2"
+    }
+
+  # module.source_bucket.aws_s3_bucket_public_access_block.this will be created
+  + resource "aws_s3_bucket_public_access_block" "this" {
+      + block_public_acls       = true
+      + block_public_policy     = true
+      + bucket                  = (known after apply)
+      + id                      = (known after apply)
+      + ignore_public_acls      = true
+      + region                  = "eu-west-2"
+      + restrict_public_buckets = true
+    }
+
+  # module.source_bucket.aws_s3_bucket_server_side_encryption_configuration.this will be created
+  + resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+      + region = "eu-west-2"
+
+      + rule {
+          + blocked_encryption_types = (known after apply)
+          + bucket_key_enabled       = true
+
+          + apply_server_side_encryption_by_default {
+              + kms_master_key_id = (known after apply)
+              + sse_algorithm     = "aws:kms"
+            }
+        }
+    }
+
+  # module.source_bucket.aws_s3_bucket_versioning.this[0] will be created
+  + resource "aws_s3_bucket_versioning" "this" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+      + region = "eu-west-2"
+
+      + versioning_configuration {
+          + mfa_delete = (known after apply)
+          + status     = "Enabled"
+        }
+    }
+
+  # module.source_bucket.time_sleep.wait_for_s3_bucket will be created
+  + resource "time_sleep" "wait_for_s3_bucket" {
+      + create_duration = "5s"
+      + id              = (known after apply)
+    }
+
+  # module.glue.module.cloudwatch_logs[0].aws_cloudwatch_log_group.this will be created
+  + resource "aws_cloudwatch_log_group" "this" {
+      + arn                         = (known after apply)
+      + deletion_protection_enabled = (known after apply)
+      + id                          = (known after apply)
+      + log_group_class             = "STANDARD"
+      + name                        = "uk-cloudenablement-sbx-aws_glue-jobs"
+      + name_prefix                 = (known after apply)
+      + region                      = "eu-west-2"
+      + retention_in_days           = 90
+      + skip_destroy                = false
+      + tags                        = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-cloudwatch-logs"
+          + "eitsce:moduleversion" = "2.6.1"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all                    = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-cloudwatch-logs"
+          + "eitsce:moduleversion" = "2.6.1"
+          + "eitsce:tagschecked"   = "true"
+        }
+    }
+
+  # module.glue.module.glue_service_role[0].data.aws_iam_policy_document.default[0] will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "default" {
+      + id                      = (known after apply)
+      + json                    = (known after apply)
+      + minified_json           = (known after apply)
+      + source_policy_documents = [
+          + (known after apply),
+        ]
+    }
+
+  # module.glue.module.glue_service_role[0].aws_iam_policy.default[0] will be created
+  + resource "aws_iam_policy" "default" {
+      + arn              = (known after apply)
+      + attachment_count = (known after apply)
+      + description      = "AWSGlueServiceRole-eits_tf_aws_glue policy for AWSGlueServiceRole-eits_tf_aws_glue role"
+      + id               = (known after apply)
+      + name             = "BUPolicyForAWSGlueServiceRole-eits_tf_aws_glue"
+      + name_prefix      = (known after apply)
+      + path             = "/"
+      + policy           = (known after apply)
+      + policy_id        = (known after apply)
+      + tags             = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-iam"
+          + "eitsce:moduleversion" = "1.9.3"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all         = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-iam"
+          + "eitsce:moduleversion" = "1.9.3"
+          + "eitsce:tagschecked"   = "true"
+        }
+    }
+
+  # module.glue.module.glue_service_role[0].aws_iam_role.default[0] will be created
+  + resource "aws_iam_role" "default" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = "glue.amazonaws.com"
+                        }
+                      + Sid       = "AllowGlueAssumeRole"
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + description           = "Role for AWS Glue, used for database eits_tf_aws_glue"
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "BURoleForAWSGlueServiceRole-eits_tf_aws_glue"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags                  = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-iam"
+          + "eitsce:moduleversion" = "1.9.3"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all              = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-iam"
+          + "eitsce:moduleversion" = "1.9.3"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + unique_id             = (known after apply)
+
+      + inline_policy (known after apply)
+    }
+
+  # module.glue.module.glue_service_role[0].aws_iam_role_policy_attachment.default[0] will be created
+  + resource "aws_iam_role_policy_attachment" "default" {
+      + id         = (known after apply)
+      + policy_arn = (known after apply)
+      + role       = "BURoleForAWSGlueServiceRole-eits_tf_aws_glue"
+    }
+
+  # module.glue.module.glue_service_role[0].aws_iam_role_policy_attachment.managed["arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"] will be created
+  + resource "aws_iam_role_policy_attachment" "managed" {
+      + id         = (known after apply)
+      + policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
+      + role       = "BURoleForAWSGlueServiceRole-eits_tf_aws_glue"
+    }
+
+Plan: 26 to add, 0 to change, 0 to destroy.
+
+
+Wiz.io IaC scan result for 's3_data_source': Success
+Report URL: https://app.wiz.io/findings/cicd-scans#~%2528cicd_scan~%2527006a033e-480b-8718-b90f-80967b078001%252A2c2026-05-12T14%2525%25252A3a51%2525%25252A3a05.06199845Z%2527%2529
+{
+  "__typename": "CICDDiskScanResult",
+  "osPackages": null,
+  "libraries": null,
+  "applications": null,
+  "endOfLifeTechnologies": null,
+  "cpes": null,
+  "secrets": null,
+  "dataFindings": null,
+  "vulnerableSBOMArtifactsByNameVersion": null,
+  "hostConfiguration": {
+    "hostConfigurationFrameworks": null,
+    "hostConfigurationFindings": null,
+    "analytics": {
+      "severity": {
+        "infoCount": 0,
+        "lowCount": 0,
+        "mediumCount": 0,
+        "highCount": 0,
+        "criticalCount": 0
+      },
+      "status": {
+        "passCount": 0,
+        "failCount": 0,
+        "errorCount": 0,
+        "notAssessedCount": 0,
+        "totalCount": 0
+      }
+    }
+  },
+  "failedPolicyMatches": null,
+  "analytics": {
+    "vulnerabilities": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "unfixedCount": 0,
+      "totalCount": 0
+    },
+    "secrets": {
+      "privateKeyCount": 0,
+      "publicKeyCount": 0,
+      "passwordCount": 0,
+      "certificateCount": 0,
+      "cloudKeyCount": 0,
+      "sshAuthorizedKeyCount": 0,
+      "dbConnectionStringCount": 0,
+      "gitCredentialCount": 0,
+      "presignedURLCount": 0,
+      "saasAPIKeyCount": 0,
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "hostConfiguration": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0
+    },
+    "malware": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "softwareSupplyChain": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "aiModel": null,
+    "sast": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "filesScannedCount": 1,
+    "directoriesScannedCount": 1
+  },
+  "sbomOutput": "",
+  "malwares": null,
+  "softwareSupplyChain": null,
+  "aiModels": null,
+  "sast": null,
+  "iac": {
+    "__typename": "CICDIACScanResult",
+    "failedPolicyMatches": null,
+    "ruleMatches": null,
+    "scanStatistics": {
+      "infoMatches": 0,
+      "lowMatches": 0,
+      "mediumMatches": 0,
+      "highMatches": 0,
+      "criticalMatches": 0,
+      "totalMatches": 0,
+      "filesFound": 1,
+      "filesParsed": 1,
+      "queriesLoaded": 27,
+      "queriesExecuted": 27,
+      "queriesExecutionFailed": 0
+    },
+    "secrets": null,
+    "fileTypes": [
+      "TERRAFORM"
+    ],
+    "discoveredResources": null
+  },
+  "ruleMatches": null,
+  "scanStatistics": {
+    "infoMatches": 0,
+    "lowMatches": 0,
+    "mediumMatches": 0,
+    "highMatches": 0,
+    "criticalMatches": 0,
+    "totalMatches": 0,
+    "filesFound": 1,
+    "filesParsed": 1,
+    "queriesLoaded": 27,
+    "queriesExecuted": 27,
+    "queriesExecutionFailed": 0
+  },
+  "fileTypes": [
+    "TERRAFORM"
+  ],
+  "discoveredResources": null
+}
+
+Plan result for 'uri_with_table': Success
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.glue.aws_glue_catalog_database.this will be created
+  + resource "aws_glue_catalog_database" "this" {
+      + arn          = (known after apply)
+      + catalog_id   = (known after apply)
+      + description  = "Test Glue catalog database using data located in an S3 bucket"
+      + id           = (known after apply)
+      + location_uri = "s3://awsglue-datasets/examples/medicare"
+      + name         = "eits_tf_aws_glue_2"
+      + region       = "eu-west-2"
+      + tags         = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all     = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+
+      + create_table_default_permission (known after apply)
+    }
+
+  # module.glue.aws_glue_catalog_table.this["medicare"] will be created
+  + resource "aws_glue_catalog_table" "this" {
+      + arn           = (known after apply)
+      + catalog_id    = (known after apply)
+      + database_name = "eits_tf_aws_glue_2"
+      + description   = "Test Glue Catalog table"
+      + id            = (known after apply)
+      + name          = "medicare"
+      + parameters    = (known after apply)
+      + region        = "eu-west-2"
+      + table_type    = (known after apply)
+
+      + partition_index (known after apply)
+
+      + storage_descriptor {
+          + location = "s3://awsglue-datasets/examples/medicare"
+
+          + columns (known after apply)
+        }
+    }
+
+  # module.glue.aws_glue_crawler.this["medicare_test_crawler"] will be created
+  + resource "aws_glue_crawler" "this" {
+      + arn           = (known after apply)
+      + database_name = "eits_tf_aws_glue_2"
+      + id            = (known after apply)
+      + name          = "medicare_test_crawler"
+      + region        = "eu-west-2"
+      + role          = (known after apply)
+      + tags          = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all      = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-glue"
+          + "eitsce:moduleversion" = "local"
+          + "eitsce:tagschecked"   = "true"
+        }
+
+      + catalog_target {
+          + database_name = "eits_tf_aws_glue_2"
+          + tables        = [
+              + "medicare",
+            ]
+        }
+
+      + schema_change_policy {
+          + delete_behavior = "LOG"
+          + update_behavior = "UPDATE_IN_DATABASE"
+        }
+    }
+
+  # module.glue.module.cloudwatch_logs[0].aws_cloudwatch_log_group.this will be created
+  + resource "aws_cloudwatch_log_group" "this" {
+      + arn                         = (known after apply)
+      + deletion_protection_enabled = (known after apply)
+      + id                          = (known after apply)
+      + log_group_class             = "STANDARD"
+      + name                        = "uk-cloudenablement-sbx-aws_glue-jobs"
+      + name_prefix                 = (known after apply)
+      + region                      = "eu-west-2"
+      + retention_in_days           = 90
+      + skip_destroy                = false
+      + tags                        = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-cloudwatch-logs"
+          + "eitsce:moduleversion" = "2.6.1"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all                    = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-cloudwatch-logs"
+          + "eitsce:moduleversion" = "2.6.1"
+          + "eitsce:tagschecked"   = "true"
+        }
+    }
+
+  # module.glue.module.glue_service_role[0].aws_iam_role.default[0] will be created
+  + resource "aws_iam_role" "default" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = "glue.amazonaws.com"
+                        }
+                      + Sid       = "AllowGlueAssumeRole"
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + description           = "Role for AWS Glue, used for database eits_tf_aws_glue_2"
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "BURoleForAWSGlueServiceRole-eits_tf_aws_glue_2"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags                  = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-iam"
+          + "eitsce:moduleversion" = "1.9.3"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + tags_all              = {
+          + "AppID"                = "23117"
+          + "BusinessUnit"         = "EITS"
+          + "CostString"           = "2000.GB.139.606005"
+          + "CreatedWith"          = "Terraform"
+          + "Environment"          = "sbx"
+          + "ResourceOwner"        = "eitsukicloud@experian.com"
+          + "eitsce:modulename"    = "eits-tf-aws-iam"
+          + "eitsce:moduleversion" = "1.9.3"
+          + "eitsce:tagschecked"   = "true"
+        }
+      + unique_id             = (known after apply)
+
+      + inline_policy (known after apply)
+    }
+
+  # module.glue.module.glue_service_role[0].aws_iam_role_policy_attachment.managed["arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"] will be created
+  + resource "aws_iam_role_policy_attachment" "managed" {
+      + id         = (known after apply)
+      + policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
+      + role       = "BURoleForAWSGlueServiceRole-eits_tf_aws_glue_2"
+    }
+
+Plan: 6 to add, 0 to change, 0 to destroy.
+
+
+Wiz.io IaC scan result for 'uri_with_table': Success
+Report URL: https://app.wiz.io/findings/cicd-scans#~%2528cicd_scan~%2527006a033e-840b-8e53-98bb-5d3001e78001%252A2c2026-05-12T14%2525%25252A3a52%2525%25252A3a03.109034413Z%2527%2529
+{
+  "__typename": "CICDDiskScanResult",
+  "osPackages": null,
+  "libraries": null,
+  "applications": null,
+  "endOfLifeTechnologies": null,
+  "cpes": null,
+  "secrets": null,
+  "dataFindings": null,
+  "vulnerableSBOMArtifactsByNameVersion": null,
+  "hostConfiguration": {
+    "hostConfigurationFrameworks": null,
+    "hostConfigurationFindings": null,
+    "analytics": {
+      "severity": {
+        "infoCount": 0,
+        "lowCount": 0,
+        "mediumCount": 0,
+        "highCount": 0,
+        "criticalCount": 0
+      },
+      "status": {
+        "passCount": 0,
+        "failCount": 0,
+        "errorCount": 0,
+        "notAssessedCount": 0,
+        "totalCount": 0
+      }
+    }
+  },
+  "failedPolicyMatches": null,
+  "analytics": {
+    "vulnerabilities": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "unfixedCount": 0,
+      "totalCount": 0
+    },
+    "secrets": {
+      "privateKeyCount": 0,
+      "publicKeyCount": 0,
+      "passwordCount": 0,
+      "certificateCount": 0,
+      "cloudKeyCount": 0,
+      "sshAuthorizedKeyCount": 0,
+      "dbConnectionStringCount": 0,
+      "gitCredentialCount": 0,
+      "presignedURLCount": 0,
+      "saasAPIKeyCount": 0,
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "hostConfiguration": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0
+    },
+    "malware": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "softwareSupplyChain": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "aiModel": null,
+    "sast": {
+      "infoCount": 0,
+      "lowCount": 0,
+      "mediumCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "totalCount": 0
+    },
+    "filesScannedCount": 1,
+    "directoriesScannedCount": 1
+  },
+  "sbomOutput": "",
+  "malwares": null,
+  "softwareSupplyChain": null,
+  "aiModels": null,
+  "sast": null,
+  "iac": {
+    "__typename": "CICDIACScanResult",
+    "failedPolicyMatches": null,
+    "ruleMatches": null,
+    "scanStatistics": {
+      "infoMatches": 0,
+      "lowMatches": 0,
+      "mediumMatches": 0,
+      "highMatches": 0,
+      "criticalMatches": 0,
+      "totalMatches": 0,
+      "filesFound": 1,
+      "filesParsed": 1,
+      "queriesLoaded": 27,
+      "queriesExecuted": 27,
+      "queriesExecutionFailed": 0
+    },
+    "secrets": null,
+    "fileTypes": null,
+    "discoveredResources": null
+  },
+  "ruleMatches": null,
+  "scanStatistics": {
+    "infoMatches": 0,
+    "lowMatches": 0,
+    "mediumMatches": 0,
+    "highMatches": 0,
+    "criticalMatches": 0,
+    "totalMatches": 0,
+    "filesFound": 1,
+    "filesParsed": 1,
+    "queriesLoaded": 27,
+    "queriesExecuted": 27,
+    "queriesExecutionFailed": 0
+  },
+  "fileTypes": null,
+  "discoveredResources": null
+}
